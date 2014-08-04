@@ -8,6 +8,10 @@ class ImproperlyConfigured(Exception):
     """ SurveyGizmo is somehow improperly configured."""
     pass
 
+class ClientError(Exception):
+    """ SurveyGizmo responded with failure!"""
+    pass
+
 
 class InvalidFilter(Exception):
     """ Filter format is invalid."""
@@ -255,6 +259,8 @@ class _API(object):
             response = requests.get(url, params=params, **config.requests_kwargs)
 
         response.raise_for_status()
+        if not response.json()['result_ok'] == 1:
+            raise ClientError(response.json()['message'])
 
         if not config.response_type:
             return response.json()
