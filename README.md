@@ -71,6 +71,18 @@ sg.config.access_token_secret = '54321'
 * **access_token_secret**
 * **response_type** - None, 'json', 'pson', 'xml', 'debug'. If None, the response is returned as a python dictionary.
 
+## Exceptions
+
+This API can throw two types of exceptions: ImproperlyConfigured and ClientError
+
+### ImproperlyConfigured
+
+Thrown when authentication is improperly configured or the API version specified is invalid.
+
+### ClientError
+
+Thrown when the server rejects a given request. A ClientError is thrown along with the response message.
+
 ## Filters
 
 Filters are currently untested. 
